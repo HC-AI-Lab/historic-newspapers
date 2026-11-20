@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HCAI Lab — Historic Newspapers</title>
+<link rel="stylesheet" href="shared/style.css">
+</head><body>
+<header><h1>Historic Newspapers</h1><div class="sub">HCAI Lab · Punjab University · digitised press archive</div></header>
+<div class="wrap">
+  <p style="color:var(--muted);margin-bottom:1.4rem">Browse digitised issues. Select a newspaper to begin.</p>
+  <div class="list" id="papers"></div>
+</div>
+<div id="viewer"><div class="bar">
+  <button onclick="closeViewer()">← Close</button><span id="vtitle"></span>
+  <div class="pager"><button onclick="prevPage()">‹</button><span id="pginfo">1/1</span><button onclick="nextPage()">›</button></div>
+  <button onclick="dl()">Download</button>
+</div><div id="pdf-wrap"></div></div>
+<footer>HCAI Lab · hcai-lab.github.io/historic-newspapers</footer>
+<script src="data/config.js"></script>
+<script src="data/zamindar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="shared/viewer.js"></script>
+<script>
+const ICON='<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>';
+const list=document.getElementById('papers');
+Object.entries(window.PAPERS).forEach(([key,p])=>{
+  const el=document.createElement('div');el.className='card';
+  el.innerHTML=`<div class="ico">${ICON}</div><div><h3>${p.name}</h3><small>${p.span}</small></div>`;
+  el.onclick=()=>location.href=key+'/';
+  list.appendChild(el);
+});
+</script></body></html>
