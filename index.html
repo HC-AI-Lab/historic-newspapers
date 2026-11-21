@@ -1,28 +1,39 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HCAI Lab — Historic Newspapers</title>
+<title>Historic Newspapers — HCAI Lab</title>
+<meta name="description" content="Digitised pre-partition Urdu newspapers (Zamindar, Inquilab) from the University of the Punjab archive.">
 <link rel="stylesheet" href="shared/style.css">
 </head><body>
-<header><h1>Historic Newspapers</h1><div class="sub">HCAI Lab · Punjab University · digitised press archive</div></header>
-<div class="wrap">
-  <p style="color:var(--muted);margin-bottom:1.4rem">Browse digitised issues. Select a newspaper to begin.</p>
-  <div class="list" id="papers"></div>
-</div>
-<div id="viewer"><div class="bar">
-  <button onclick="closeViewer()">← Close</button><span id="vtitle"></span>
-  <button onclick="dl()">Download</button>
-</div><div id="pdf-wrap"></div></div>
-<footer>HCAI Lab · hc-ai-lab.github.io/historic-newspapers</footer>
+<header><h1>Historic Newspapers</h1><div class="sub">HCAI Lab · University of the Punjab · digitised press archive</div></header>
+
+<main class="wrap">
+  <form class="chooser" onsubmit="return false" aria-label="Choose an edition">
+    <label>Newspaper<select id="sel-paper"></select></label>
+    <label>Year<select id="sel-year" disabled></select></label>
+    <label class="wide">Edition<select id="sel-edition" disabled></select></label>
+  </form>
+
+  <section id="reader" hidden>
+    <div class="bar">
+      <button type="button" id="btn-prev" aria-label="Previous edition">‹ Previous</button>
+      <h2 id="ed-title"></h2>
+      <button type="button" id="btn-next" aria-label="Next edition">Next ›</button>
+    </div>
+    <div class="frame"><div class="loading"><div class="spin"></div><div>Loading…</div></div></div>
+    <div class="tools">
+      <a id="lnk-full" target="_blank" rel="noopener">Open full screen ↗</a>
+      <a id="lnk-dl" target="_blank" rel="noopener">Download PDF ↓</a>
+      <span class="hint">Tip: ← → keys move between editions</span>
+    </div>
+  </section>
+
+  <p id="empty" class="empty">Choose a newspaper, a year and an edition to start reading.</p>
+</main>
+
+<footer>HCAI Lab · Faculty of Computing and Information Technology, University of the Punjab · hc-ai-lab.github.io/historic-newspapers</footer>
+
 <script src="data/config.js"></script>
+<!-- one line per newspaper; each file adds itself to window.PAPERS -->
 <script src="data/zamindar.js"></script>
-<script src="shared/viewer.js"></script>
-<script>
-const ICON='<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>';
-const list=document.getElementById('papers');
-Object.entries(window.PAPERS).forEach(([key,p])=>{
-  const el=document.createElement('div');el.className='card';
-  el.innerHTML=`<div class="ico">${ICON}</div><div><h3>${p.name}</h3><small>${p.span}</small></div>`;
-  el.onclick=()=>location.href=key+'/';
-  list.appendChild(el);
-});
-</script></body></html>
+<script src="shared/app.js"></script>
+</body></html>

@@ -1,35 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zamindar — Historic Newspapers</title>
-<link rel="stylesheet" href="../shared/style.css"></head><body>
-<header><h1>Zamindar</h1><div class="sub">1921</div></header>
-<div class="wrap">
-  <a class="back" href="../">← All newspapers</a>
-  <div id="years"></div>
-</div>
-<div id="viewer"><div class="bar">
-  <button onclick="closeViewer()">← Close</button><span id="vtitle"></span>
-  <button onclick="dl()">Download</button>
-</div><div id="pdf-wrap"></div></div>
-<footer>HCAI Lab · Historic Newspapers</footer>
-<script src="../data/config.js"></script>
-<script src="../data/zamindar.js"></script>
-<script src="../shared/viewer.js"></script>
-<script>
-const P = window.PAPERS.zamindar;
-const el = document.getElementById('years');
-for (const [year, yd] of Object.entries(P.years)) {
-  const h = document.createElement('div');
-  h.innerHTML = `<h2 class="sec">${year}</h2><div class="list"></div>`;
-  const grid = h.querySelector('.list');
-  for (const [mm, md] of Object.entries(yd.months)) {
-    for (const iss of md.issues) {
-      const c = document.createElement('div'); c.className='card';
-      c.innerHTML = `<div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div><div><h3>${md.label} — Issue ${iss.issue}</h3><small>click to read</small></div>`;
-      c.onclick = () => openPdf(iss.id, `${P.name} ${md.label} ${year} — Issue ${iss.issue}`);
-      grid.appendChild(c);
-    }
-  }
-  el.appendChild(h);
-}
-</script></body></html>
+<meta http-equiv="refresh" content="0; url=../#zamindar">
+<script>location.replace('../#zamindar' + (location.hash ? '/' + location.hash.slice(1) : ''));</script>
+</head><body><a href="../#zamindar">Zamindar</a></body></html>
