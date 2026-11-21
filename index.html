@@ -1,36 +1,36 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
 <title>Historic Newspapers — HCAI Lab</title>
-<meta name="description" content="Digitised pre-partition Urdu newspapers (Zamindar, Inquilab) from the University of the Punjab archive.">
+<meta name="description" content="Digitised pre-partition Urdu newspapers from the University of the Punjab archive.">
 <link rel="stylesheet" href="shared/style.css">
 </head><body>
-<header><h1>Historic Newspapers</h1><div class="sub">HCAI Lab · University of the Punjab · digitised press archive</div></header>
+<header class="top">
+  <h1>Historic Newspapers</h1>
+  <p>HCAI Lab · University of the Punjab</p>
+</header>
 
 <main class="wrap">
-  <form class="chooser" onsubmit="return false" aria-label="Choose an edition">
-    <label>Newspaper<select id="sel-paper"></select></label>
-    <label>Year<select id="sel-year" disabled></select></label>
-    <label class="wide">Edition<select id="sel-edition" disabled></select></label>
-  </form>
-
-  <section id="reader" hidden>
-    <div class="bar">
-      <button type="button" id="btn-prev" aria-label="Previous edition">‹ Previous</button>
-      <h2 id="ed-title"></h2>
-      <button type="button" id="btn-next" aria-label="Next edition">Next ›</button>
-    </div>
-    <div class="frame"><div class="loading"><div class="spin"></div><div>Loading…</div></div></div>
-    <div class="tools">
-      <a id="lnk-full" target="_blank" rel="noopener">Open full screen ↗</a>
-      <a id="lnk-dl" target="_blank" rel="noopener">Download PDF ↓</a>
-      <span class="hint">Tip: ← → keys move between editions</span>
-    </div>
-  </section>
-
-  <p id="empty" class="empty">Choose a newspaper, a year and an edition to start reading.</p>
+  <nav class="papers" id="papers" aria-label="Newspapers"></nav>
+  <nav class="years" id="years" aria-label="Years"></nav>
+  <p class="count" id="count"></p>
+  <section class="grid" id="grid" aria-label="Editions"></section>
 </main>
 
-<footer>HCAI Lab · Faculty of Computing and Information Technology, University of the Punjab · hc-ai-lab.github.io/historic-newspapers</footer>
+<div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="r-title">
+  <div class="r-bar">
+    <button type="button" class="r-close" id="r-close" aria-label="Close">✕</button>
+    <div class="r-head"><b id="r-title"></b><small id="r-sub"></small></div>
+    <a class="r-dl" id="r-dl" target="_blank" rel="noopener" aria-label="Download PDF">⤓ PDF</a>
+  </div>
+  <div class="r-body" id="r-body"><div class="r-load"><span class="spin"></span>Loading…</div></div>
+  <div class="r-nav">
+    <button type="button" id="r-prev">‹ Previous edition</button>
+    <button type="button" id="r-next">Next edition ›</button>
+  </div>
+</div>
+
+<footer>HCAI Lab · Faculty of Computing and Information Technology, University of the Punjab</footer>
 
 <script src="data/config.js"></script>
 <!-- one line per newspaper; each file adds itself to window.PAPERS -->
