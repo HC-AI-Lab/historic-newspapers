@@ -9,13 +9,11 @@
 </div>
 <div id="viewer"><div class="bar">
   <button onclick="closeViewer()">← Close</button><span id="vtitle"></span>
-  <div class="pager"><button onclick="prevPage()">‹</button><span id="pginfo">1/1</span><button onclick="nextPage()">›</button></div>
   <button onclick="dl()">Download</button>
 </div><div id="pdf-wrap"></div></div>
 <footer>HCAI Lab · Historic Newspapers</footer>
 <script src="../data/config.js"></script>
 <script src="../data/zamindar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="../shared/viewer.js"></script>
 <script>
 const P = window.PAPERS.zamindar;
@@ -28,7 +26,7 @@ for (const [year, yd] of Object.entries(P.years)) {
     for (const iss of md.issues) {
       const c = document.createElement('div'); c.className='card';
       c.innerHTML = `<div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div><div><h3>${md.label} — Issue ${iss.issue}</h3><small>click to read</small></div>`;
-      c.onclick = () => openPdf(window.STORAGE.base + iss.id, `${P.name} ${md.label} ${year} — Issue ${iss.issue}`);
+      c.onclick = () => openPdf(iss.id, `${P.name} ${md.label} ${year} — Issue ${iss.issue}`);
       grid.appendChild(c);
     }
   }

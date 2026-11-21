@@ -35,3 +35,7 @@ h2.sec{font-size:1.3rem;color:var(--accent);margin:1.2rem 0 .6rem;font-weight:40
 .spin{display:inline-block;width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite;margin-bottom:1rem}
 @keyframes sp{to{transform:rotate(360deg)}}
 footer{text-align:center;padding:1.8rem 1rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border);margin-top:2.5rem}
+
+#pdf-wrap{position:relative}
+#pdf-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+#pdf-wrap .loading{position:absolute;inset:0}

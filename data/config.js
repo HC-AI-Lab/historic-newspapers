@@ -1,15 +1,18 @@
 // ===== BACKEND / STORAGE CONFIG (swap here, UI unchanged) =====
-// Each paper's PDFs live on Google Drive. The viewer builds:
-//   <base>/<driveId>
+// Each paper's PDFs live on Google Drive ("anyone with the link" = viewer).
+// The viewer embeds Drive's own PDF viewer in an iframe, built from `preview`;
+// the Download button opens `download`. `{id}` is replaced by the Drive file ID.
+//
+// Why an iframe and not fetch() + pdf.js: Google Drive returns 403 to every
+// cross-site browser fetch (Sec-Fetch-Site: cross-site), on both
+// drive.google.com/uc and drive.usercontent.google.com. Embedding its viewer works.
+// To use our own pdf.js reader later, switch to the Drive API v3
+// (https://www.googleapis.com/drive/v3/files/{id}?alt=media&key=<referrer-restricted key>).
+//
 // When we move to the 400 GB project account (or another host),
-// change `base` (and/or `type`) here — nothing else needs to change.
+// change the patterns here; nothing else needs to change.
 window.STORAGE = {
-  type: "gdrive",
-  // Google Drive "anyone with link" fetch URL pattern.
-  // Must be drive.usercontent.google.com: it sends CORS headers
-  // (access-control-allow-origin: *). drive.google.com/uc returns 403
-  // to browser fetch() calls (requests carrying an Origin header).
-  base: "https://drive.usercontent.google.com/download?export=download&id=",
-  // Alternate (if the above is blocked on Workspace domains):
-  // base: "https://www.googleapis.com/drive/v3/files/ID?alt=media"
+  type: "gdrive-embed",
+  preview: "https://drive.google.com/file/d/{id}/preview",
+  download: "https://drive.google.com/uc?export=download&id={id}",
 };
